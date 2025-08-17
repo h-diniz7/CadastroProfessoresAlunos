@@ -1,0 +1,50 @@
+﻿@model IEnumerable<InstituicaoEnsino.Models.Aluno>
+
+@{
+    ViewData["Title"] = "Listagem Alunos";
+    var professorId = ViewBag.ProfessorId;
+    var professorNome = ViewBag.ProfessorNome;
+}
+
+<div class="container mt-4">
+    <h1 class="display-4">Listagem de Alunos</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Mensalidade</th>
+                    <th>Data de Vencimento</th>
+                    <th>Professor</th>
+                    <th style="width: 220px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Aluno aluno in Model)
+                {
+                    <tr id="aluno-@aluno.AlunoId">
+                        <td>@aluno.AlunoId</td>
+                        <td>@aluno.Nome</td>
+                        <td>@Html.DisplayFor(modelItem => aluno.Mensalidade)</td>
+                        <td>@Html.DisplayFor(modelItem => aluno.DataVencimento)</td>
+                        <td>@professorNome</td>
+                        <td>
+                            <a class="btn btn-danger" onclick="removerAluno(@aluno.AlunoId)">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">Nenhum Aluno cadastrado.</div>
+
+    }
+    <a asp-controller="Alunos" asp-action="Importar" class="btn btn-primary" asp-route-professorId="@professorId">Importar Alunos</a>
+    <a class="btn btn-secondary" asp-controller="Professores" asp-action="Index" role="button">Voltar</a>
+
+</div>

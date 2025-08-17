@@ -1,0 +1,32 @@
+﻿@model InstituicaoEnsino.Models.Professor
+
+@{
+    ViewData["Title"] = "Cadastrar Professor";
+}
+
+@if (TempData["Mensagem"] != null)
+{
+    <script>
+        window.onload = function () {
+        alert('@Html.Raw(TempData["Mensagem"])');
+        }
+    </script>
+}
+
+<h1 class="display-4">Cadastrar Professor</h1>
+
+<form asp-controller="Professores" asp-action="Criar" method="post">
+
+    <div class="mb-3">
+        <label for="Nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" asp-for="Nome" placeholder="Nome Professor">
+        @Html.ValidationMessageFor(p => p.Nome)
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <a class="btn btn-secondary" asp-controller="Professores" asp-action="Index" role="button">Voltar</a>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

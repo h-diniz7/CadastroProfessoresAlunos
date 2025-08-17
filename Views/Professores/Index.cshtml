@@ -1,0 +1,43 @@
+﻿@model IEnumerable<InstituicaoEnsino.Models.Professor>
+
+@{
+    ViewData["Title"] = "Listagem Professores";
+}
+
+<div class="container mt-4">
+    <h1 class="display-4">Listagem de Professores</h1>
+
+    <div class="mb-3">
+        <a class="btn btn-primary" href="@Url.Action("Criar")">Cadastrar Professor</a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th style="width: 220px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Professor professor in Model)
+                {
+                    <tr>
+                        <td>@professor.ProfessorId</td>
+                        <td>@professor.Nome</td>
+                        <td>
+                            <a class="btn btn-primary" asp-route-id="@professor.ProfessorId" asp-controller="Alunos" asp-action="Index">Ver Alunos</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">Nenhum professor cadastrado.</div>
+    }
+</div>

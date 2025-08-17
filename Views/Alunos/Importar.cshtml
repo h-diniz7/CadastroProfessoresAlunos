@@ -1,0 +1,27 @@
+﻿@model InstituicaoEnsino.Models.Aluno
+@{
+    ViewData["Title"] = "Importar Alunos";
+    var professorId = ViewBag.ProfessorId;
+}
+
+@if (TempData["Mensagem"] != null)
+{
+    <script>
+        window.onload = function () {
+        alert('@Html.Raw(TempData["Mensagem"])');
+        }
+    </script>
+}
+
+<h1 class="display-4">Importar Lista de Alunos</h1>
+
+<br />
+<form asp-action="Importar" asp-controller="Alunos" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="professorId" asp-for="ProfessorId" value="@professorId" />
+    <div class="custom-file mb-3">
+        <input type="file" class="custom-file-input" id="customFile" name="Arquivo">
+        <button type="submit">Importar</button>
+    </div>
+
+
+</form>
